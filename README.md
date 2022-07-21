@@ -32,11 +32,11 @@
 <p>ORM (Object Relational Mapping) é uma técnica para mapeamento entre um modelo de dados relacional e um modelo orientado a objetos que visa resolver, ou pelo menos minimizar, as diferenças entres estes dois modelos. Para facilitar a aplicação desta técnica surgiram os frameworks ORM, como por exemplo, o NHibernate e o Entity Framework. Desta forma, esses frameworks se localizam em uma camada intermediária entre a lógica da sua aplicação e o seu SGDB.
 <p>O framework passa a receber as solicitações de interação com o SGDB através de objetos de sua aplicação e gera automaticamente todo o SQL necessário para a operação solicitada, nos poupando do trabalho de escrita e manutenção deste SQL e abstraindo o uso do SGDB, fazendo com que nos preocupemos apenas com nosso modelo de objetos. Além disso, o framework já trata as variações de tipos de dados existentes entre nossa aplicação e nosso SGDB.
 <p>Com isso, a aplicação passa a interagir com o framework e não mais com a base de dados diretamente, desacoplando nosso sistema de SGDBs específicos. Além disso, com uso de frameworks ORM a produtividade aumenta devido ao fato de não precisarmos escrever códigos SQL para inserir, alterar, excluir e recuperar dados do SGDB.
-##Os Principais ORMs
+## Os Principais ORMs
 <p>Os principais ORMs que trabalham com o .NET são o Entity Framework e NHibernate mas estes não são os únicos. A primeira tentativa de ORM da Microsoft no .NET foi o LinqToSQL, que ainda é usado por muita pessoas mas que aos poucos foi sendo substituído pelo Entity Framework. Na versão 4 do .NET a Microsoft anunciou que iria descontinuar o LinqToSql, tornando o Entity Framework a opção nativa para ORM.
 <p>O Entity Framework vem ganhando melhorias muito rapidamente, no momento em que escrevo este artigo a versão 6 já está disponível em alpha e a opção da Microsoft por torná-lo Open Source aumentou o ritmo de melhorias e sugestões ao framework.
 <p>Porém, o NHibernate ainda possui uma consideravel preferência por possuir uma comunidade ativa e por suportar mais escolhas de bancos de dados do que o Entity. A conversa sobre performace pode ser esquecida a partir da versão 5 do Entity Framework quando a performace se equiparou entre eles.
-#Como funciona o ORM?
+## Como funciona o ORM?
 <p>O ORM funciona através do mapeamento das características da base de dados para os objetos de nossa aplicação. O primeiro conceito chave é traçar um paralelo entre Classe x Tabela e Propriedade x Coluna. O ORM nos permite informar em que tabela cada classe será persistida e em que coluna do SGDB cada propriedade ficará armazenada.
 <p>Exemplo de mapeamento em XML com NHibernate.
   
@@ -116,7 +116,7 @@
 <p>Exemplo de mapeamento com Fluent API em NHibernate.
 <p>Pode-se observar o mapeamento com o FluentNHibernate, que é uma iniciativa da comunidade que visa permitir o mapeamento usando uma Fluent API para o NHibernate. Veja que nossa classe de mapeamento herda de uma classe base de mapeamento do FluentNHibernate, chamada ClassMap (linha 10), indicando no tipo genérico a classe que queremos mapear. Esta classe é a responsável por determinar o mapeamento de um objeto do sistema para a base de dados.Na linha 13 temos um método que nos permite indicar a propriedade identificadora do objeto e a coluna para onde a mesma está mapeada. Nas linhas 14 e 15 nós temos o mapeamento das propriedades Nome e CPF, não sendo necessária a definição da coluna da base de dados, pois esta possui o mesmo nome das propriedades do objeto. Por fim, na linha 17 temos a definição da tabela onde os dados da classe Cliente serão persistidos.
 <p>Para muitos o uso de Fluent Interface é o melhor dos dois mundos, onde pode-se realizar todo o mapeamento em arquivos separados utilizando o próprio C#, com todos os recursos de refatoração e intellisense disponíveis e sem poluir nossos objetos.
-##Persistência de Dados
+## Persistência de Dados
 <p>Agora que já compreendemos como as tabelas e colunas são mapeadas para classes e propriedades, como é feita a persistência destes dados através de frameworks ORM?
 <p>Cada ORM tem seu estilo de código para a persistência dos dados, mas em geral eles possuem o mesmo caminho: interpretar o comando que você solicitou, verificar qual função ou conjunto de funções SQL são necessárias para executar o comando solicitado, efetuar a leitura do mapeamento da classe que você está usando, gerar o SQL necessário, abrir uma conexão com o SGDB, executar o SQL e retornar o resultado.
 <p>A seguir terá dois exemplos bem diferentes, um em ruby com o ActiveRecord, um ORM muito popular dentro do framework Rails, e um exemplo em C# com o Entity Framework.
@@ -150,7 +150,7 @@
 2  INTO TB_PESSOA(NOME) VALUES ("Priscila Mayumi Sato";);
 ~~~
   
-##Formas de acesso aos dados
+## Formas de acesso aos dados
 <p>Os frameworks ORM nos fornecem uma série de maneiras para acessar os dados persistidos no nosso SGDB, dentre estas formas pode-se destacar:
 
 * OCL – Object Constraint Language – São consultas baseadas em critérios definidos em objetos, como por exemplo, os objetos Criteria do NHibernate.
@@ -171,7 +171,15 @@
 <p>Não é uma regra mas não é incomum encontrar uma linguagem própria de consulta nos frameworks ORM (Exemplo HQL / Linq). A mecânica é que os comandos na linguagem específica passem por um interpretador da framework e depois sejam traduzidos para uma query SQL para ser executada no SGDB.
 <p>Normalmente essas linguagens de consulta são parecidas com a linguagem SQL. Exemplos de linguagens de consulta são o LINQ do .NET, o HQL do NHibernate, a DQL (Doctrine Query Language) do Doctrine (framework de ORM para linguagem PHP), e a LIQUidFORM, uma linguagem que se inspirou no LINQ só que para rodar no JPA (Java Persistence API) da plataforma Java.
 <p>A mecânica é semelhante ao passar um comando do framework para que ele interprete e crie os comandos SQL, a diferença é a flexibilidade, pois com uma linguagem própria de consultas, temos mais liberdade para trabalhar com os dados. Além disso, você não precisa se preocupar com o uso de comandos específicos de cada SGDB, pois a própria framework já trata isso.
+
+~~~
+01       IEnumerable<Student> studentQuery =
+02           from student in students
+03           where student.Scores[0] > 90
+04           select student;
+~~~
   
+<p>Exemplo de comando com LINQ
   
   
   
