@@ -1,5 +1,5 @@
 # T03-ORM-e-ODBC-20-07-22
-## ORM - Object Relational Mapper
+# ORM - Object Relational Mapper
 <p>ORM ou mapeador objeto relaciona, é um tipo de ferramenta muito utilizada hoje em dia, com o propósito de unir o mundo orietado a objetos e o mundo relacional.
 <p>Este crescimento tem se dado principalmente pelo fato de muitos desenvolvedores não se sentirem a vontade em escrever código SQL e pela produtividade que esta técnica nos proporciona. Existem ótimos ORM´s como Hibernate, NHibernate, Entity Framework e etc.
 
@@ -13,37 +13,7 @@
     
 <p>A imagem nos traz uma ideia de como o ORM trabalha. Ela faz o mapeamento da classe para o banco de dados e cada ORM tem suas particularidades para gerar o SQL referente a inserção do objeto que corresponde a uma tabela no banco de dados e realizar a operação. Utilizando ORM, também se ganha produtividade, pois deixa-se de escrever os comando SQL para deixar que o próprio ORM, faça isto por você.
 
-## ODBC
-## Conceitos básicos do ODBC no Minitab
-<p>Use ODBC para importar dados de um aplicativo de banco de dados (como o Access ou SQL) para Minitab a fim de analisá-los. ODBC permite que você especifique um subconjunto de dados a serem importados. Por exemplo, um departamento de suporte técnico usa um banco de dados para controlar o número de chamadas de telefone, mensagens de voz e e-mails por dia. O gerente utiliza ODBC para importar os dados de um determinado intervalo de datas para o Minitab com a finalidade de análise.
-<p>Com o ODBC, o link não é dinâmico, o que significa que você deve executar o comando toda a vez que desejar que a troca de dados aconteça. No entanto, é possível incorporar consultas ODBC em uma macro, de modo que você possa executar o comando repetidamente com facilidade.
-<p>Requisitos para usar o ODBC no Minitab.
-<p>Para usar o ODBC no Minitab, você deve ter os itens a seguir em seu computador. Para obter mais informações, entre em contato com o administrador do sistema de banco de dados.
 
-## O Administrador da Fonte de Dados ODBC (utilitário)
-<p>Use o Administrador da Fonte de Dados ODBC para criar e executar uma consulta de banco de dados. Para abrir o Administrador da Fonte de Dados ODBC a partir do Minitab, escolha Arquivo > Banco de dados de consultas (ODBC). Para abrir a versão do Windows do Administrador da Fonte de Dados ODBC, em seu Painel de Controle, localize e abra Ferramentas Administrativas, em seguida, abra Fontes de dados (ODBC).
-  
-## Um driver ODBC
-<p>Você deve ter o driver para o tipo de banco de dados (como o Access) ao qual você deseja se conectar. Alguns drivers podem já estar instalados em seu computador. Adicione um driver usando o programa de instalação de driver, não de dentro do Administrador da Fonte de Dados ODBC. Você pode obter drivers ODBC a partir do site de aplicativos de banco de dados.
-## Uma fonte de dados
-<p>Uma fonte de dados ODBC armazena as informações técnicas que são necessárias para acessar os dados, como o nome do driver, o endereço de rede e assim por diante. Algumas fontes de dados já pode estar configuradas em seu computador. Novas fontes de dados são definidas no Administrador da Fonte de Dados ODBC, seja no Minitab ou no Windows. Você pode ter os seguintes tipos de fontes de dados:
-* Fonte de dados de arquivo: as informações de fonte de dados são armazenadas em um arquivo DSN, que você pode compartilhar com outras pessoas.
-* Fonte de dados da máquina: as informações de fonte de dados são específica para o computador e você não pode compartilhá-las com outras pessoas. Os dois tipos de fontes de dados da máquina são de Sistema e de Usuário. Fontes de dados do usuário pode ser usadas apenas por um usuário no computador. Fontes de dados do sistema pode ser usadas por todos os usuários no computador, ou por um serviço de todo o sistema.
-## OBSERVAÇÃO
-<p>Se você tiver uma versão de 64 bits do Windows e você quiser criar um sistema DSN (fonte de dados da máquina) usando o Administrador da Fonte de Dados ODBC do Windows, você deve usar o Administrador da Fonte de Dados ODBC de 32 bits. Para iniciar este administrador, navegue até C:\Windows\SysWOW64\odbcad32.exe.
-## Como o Minitab converte dados ODBC
-<p>O Minitab importa registros de banco de dados como linhas. O Minitab importa os campos nos registros como colunas. O Minitab coloca os dados importados à direita de qualquer dado que já está na worksheet. A tabela a seguir mostra como Minitab converte tipos de campos para tipos de coluna.
-  
-Tipo de campo de banco de dados | Tipo de coluna do Minitab | Observações
-:------------------------------:-------------------------:-----------:
-  Memo e Texto | O Minitab trunca valores que tenham mais de 80 caracteres. |  |
-  Numérico, Moeda, e Contador | Numérico |     |
-  Sim/Não
-  
-  
-  # # # # # # # # # # # # # # # # # # # # # # # #
-  
-# Tutorial ORM
 ## ORM - Object Relational Mapping - Revista Easy .Net Magazine 28
 <p>Neste tutorial veremos os conceitos principais por trás da técnica e dos frameworks ORMs, como a sua mecânica e funcionamento. Veremos o que são e como trabalham, conceituando as principais características destes e apresentando quais os principais frameworks existentes no mercado.
 <p>Por exemplo: Quase todo sistema precisa gravar dados durante seu uso que podem ser guardados para posterior processamento ou leitura como, por exemplo, num sistema de uma loja que precisa guardar os dados dos produtos, vendas, funcionários, dentre outros.
@@ -227,4 +197,36 @@ Tipo de campo de banco de dados | Tipo de coluna do Minitab | Observações
 <p>O que vale ressaltar é que se alguém está trabalhando com um grande volume de dados, como por exemplo um relatório que retorna dezenas de milhares de registros ou uma importação de um grande volume de registros, pode ser melhor executar isso com SQL nativo do que com um framework ORM, visto que se formos criar dezenas de milhares de objetos em memória para isso, a diferença de performance poderá sair da casa de milésimos de segundos e passará para a casa de segundos (ou até minutos, dependendo do volume de dados), sendo percebida pelo usuário final. Além disso, aplicações críticas onde estes milésimos de segundos fazem diferença para o domínio em questão não devem usar ORM, buscando sempre o acesso mais direto possível à informação.
 <p>Diante dos principais prós (produtividade e manutenção) e contras (performance), o que vale é sempre o bom senso para avaliar cada caso, sempre buscando o melhor equilíbrio, avaliando o que é mais importante e o que traz mais impacto para o projeto em questão.
   
-## tUTORIAL ODBC
+
+# ODBC
+## Conceitos básicos do ODBC no Minitab
+<p>Use ODBC para importar dados de um aplicativo de banco de dados (como o Access ou SQL) para Minitab a fim de analisá-los. ODBC permite que você especifique um subconjunto de dados a serem importados. Por exemplo, um departamento de suporte técnico usa um banco de dados para controlar o número de chamadas de telefone, mensagens de voz e e-mails por dia. O gerente utiliza ODBC para importar os dados de um determinado intervalo de datas para o Minitab com a finalidade de análise.
+<p>Com o ODBC, o link não é dinâmico, o que significa que você deve executar o comando toda a vez que desejar que a troca de dados aconteça. No entanto, é possível incorporar consultas ODBC em uma macro, de modo que você possa executar o comando repetidamente com facilidade.
+<p>Requisitos para usar o ODBC no Minitab.
+<p>Para usar o ODBC no Minitab, você deve ter os itens a seguir em seu computador. Para obter mais informações, entre em contato com o administrador do sistema de banco de dados.
+
+## O Administrador da Fonte de Dados ODBC (utilitário)
+<p>Use o Administrador da Fonte de Dados ODBC para criar e executar uma consulta de banco de dados. Para abrir o Administrador da Fonte de Dados ODBC a partir do Minitab, escolha Arquivo > Banco de dados de consultas (ODBC). Para abrir a versão do Windows do Administrador da Fonte de Dados ODBC, em seu Painel de Controle, localize e abra Ferramentas Administrativas, em seguida, abra Fontes de dados (ODBC).
+  
+## Um driver ODBC
+<p>Você deve ter o driver para o tipo de banco de dados (como o Access) ao qual você deseja se conectar. Alguns drivers podem já estar instalados em seu computador. Adicione um driver usando o programa de instalação de driver, não de dentro do Administrador da Fonte de Dados ODBC. Você pode obter drivers ODBC a partir do site de aplicativos de banco de dados.
+## Uma fonte de dados
+<p>Uma fonte de dados ODBC armazena as informações técnicas que são necessárias para acessar os dados, como o nome do driver, o endereço de rede e assim por diante. Algumas fontes de dados já pode estar configuradas em seu computador. Novas fontes de dados são definidas no Administrador da Fonte de Dados ODBC, seja no Minitab ou no Windows. Você pode ter os seguintes tipos de fontes de dados:
+* Fonte de dados de arquivo: as informações de fonte de dados são armazenadas em um arquivo DSN, que você pode compartilhar com outras pessoas.
+* Fonte de dados da máquina: as informações de fonte de dados são específica para o computador e você não pode compartilhá-las com outras pessoas. Os dois tipos de fontes de dados da máquina são de Sistema e de Usuário. Fontes de dados do usuário pode ser usadas apenas por um usuário no computador. Fontes de dados do sistema pode ser usadas por todos os usuários no computador, ou por um serviço de todo o sistema.
+## OBSERVAÇÃO
+<p>Se você tiver uma versão de 64 bits do Windows e você quiser criar um sistema DSN (fonte de dados da máquina) usando o Administrador da Fonte de Dados ODBC do Windows, você deve usar o Administrador da Fonte de Dados ODBC de 32 bits. Para iniciar este administrador, navegue até C:\Windows\SysWOW64\odbcad32.exe.
+## Como o Minitab converte dados ODBC
+<p>O Minitab importa registros de banco de dados como linhas. O Minitab importa os campos nos registros como colunas. O Minitab coloca os dados importados à direita de qualquer dado que já está na worksheet. A tabela a seguir mostra como Minitab converte tipos de campos para tipos de coluna.
+  
+Tipo de campo de banco de dados | Tipo de coluna do Minitab | Observações
+:------------------------------:-------------------------:-----------:
+Memo e Texto                | O Minitab trunca valores que tenham mais de 80 caracteres. |    |
+Numérico, Moeda, e Contador | Numérico                                                   |    |
+Sim/Não                     | Numérico  | O Minitab converte valores "Sim" para 1s.
+O Minitab converte valores "Não" para 0s.|
+Lógico (verdadeiro/falso)   | Numérico  |O Minitab converte valores verdadeiros para 1s.
+O Minitab converte valores falsos para 0s. |
+Data/Hora                   | Data/Hora                                                  |
+  
+ 
