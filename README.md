@@ -40,7 +40,7 @@
 <p>O ORM funciona através do mapeamento das características da base de dados para os objetos de nossa aplicação. O primeiro conceito chave é traçar um paralelo entre Classe x Tabela e Propriedade x Coluna. O ORM nos permite informar em que tabela cada classe será persistida e em que coluna do SGDB cada propriedade ficará armazenada.
 <p>Exemplo de mapeamento em XML com NHibernate.
   
-~~
+~~~
   <?xml version="1.0" encoding="utf-8" ?>
      <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
          namespace="DevMedia.Exemplo " assembly="DevMedia.Exemplo">
@@ -51,7 +51,7 @@
          <property name="CPF"/>
        </class>
      </hibernate-mapping>
-~~~~
+~~~
   
 <p>Pode-se observar um exemplo de mapeamento através do framework NHibernate. Veja que na linha 2 é definido o namespace e o assembly onde está a classe e na linha 3 é indicado o nome da mesma seguido do nome de sua respectiva tabela no banco de dados. Na linha 4 tem-se uma tag Id que indica que o campo Codigo da classe é o identificador do objeto, mapeando o mesmo para a coluna CodCliente que é a chave primária da tabela. Por fim, nas linhas 5 e 6 temos o mapeamento das propriedades da classe Cliente. Vale ressaltar que nestes casos não foi informado o nome da coluna no banco de dados, pois as colunas possuem o mesmo nome das propriedades do objeto Cliente.
 <p>Com todo este mapeamento realizado, o framework passa a ter todas as informações necessárias para recuperar e persistir objetos na base de dados.
@@ -86,6 +86,9 @@
 ~~~
   
 <p>Exemplo de mapeamento com anotações com Hibernate.
+<p>Na linha 9 tem-se a definição do atributo Class com o parâmetro Table indicando o nome da tabela onde esta classe está mapeada, enquanto que na linha 12 tem-se a indicação de que a propriedade Codigo é o identificador do objeto e está mapeada para a coluna CodCliente da base de dados. Por fim tem-se o mapeamento das outras propriedades nas linhas 15 e 18.
+<p>O que muitos consideram como um inconveniente das anotações é que a classe que usa muitos Custom Attributes fica poluída e, caso o framework ORM fosse trocado,tería que alterar todas as as classes para que usassem os atributos do respectivo framework.
+<p>Como alternativa ao mapeamento, tem ainda normalmente o uso de uma Fluent API, que trata-se de uma API de mapeamento que implementa o pattern Fluent Interface (Nota do DevMan 2).
   
   
   
