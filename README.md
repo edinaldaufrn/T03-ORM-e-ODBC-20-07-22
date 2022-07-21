@@ -153,9 +153,9 @@
 ##Formas de acesso aos dados
 <p>Os frameworks ORM nos fornecem uma série de maneiras para acessar os dados persistidos no nosso SGDB, dentre estas formas pode-se destacar:
 
-*OCL – Object Constraint Language – São consultas baseadas em critérios definidos em objetos, como por exemplo, os objetos Criteria do NHibernate.
-*SQL – São consultas baseadas em um SQL tradicional. Neste caso normalmente é passado o código SQL para o framework e o mesmo retorna uma lista de objetos com o resultado da consulta.
-*Linguagens específicas – Consultas baseadas em linguagens específicas do framework ORM em questão, ou seja, ao invés de usar SQL utilizamos uma linguagem específica que o próprio framework suporta, como por exemplo, o Linq no caso do Entity Framework.
+* OCL – Object Constraint Language – São consultas baseadas em critérios definidos em objetos, como por exemplo, os objetos Criteria do NHibernate.
+* SQL – São consultas baseadas em um SQL tradicional. Neste caso normalmente é passado o código SQL para o framework e o mesmo retorna uma lista de objetos com o resultado da consulta.
+* Linguagens específicas – Consultas baseadas em linguagens específicas do framework ORM em questão, ou seja, ao invés de usar SQL utilizamos uma linguagem específica que o próprio framework suporta, como por exemplo, o Linq no caso do Entity Framework.
 <p>Além disso, cada framework possui características e recursos adicionais, como por exemplo, o NHibernate que possui um recurso chamado Named Queries que nos permite armazenar consultas SQL (ou também HQLs) em arquivos xml separados e depois mapeie os mesmos, como mapeou suas tabelas, podendo assim usá-las a qualquer momento no seu código.  
   
   
