@@ -21,13 +21,13 @@
 <p>Por exemplo: Quase todo sistema precisa gravar dados durante seu uso que podem ser guardados para posterior processamento ou leitura como, por exemplo, num sistema de uma loja que precisa guardar os dados dos produtos, vendas, funcionários, dentre outros.
 <p>No mundo .NET temos um caminho padrão para acessar dados em SGDBs relacionais através do ADO.NET, biblioteca que nos fornece diversas classes para acesso e manipulação de dados, não somente de SGDBs relacionais como também de XMLs e documentos do Office (como excel e access).
 <p>Por outro lado, ao adotar uma solução baseada puramente em ADO.NET sofremos com alguns problemas, como:
-*Temos que escrever todo o SQL de nossa aplicação manualmente, tornando o desenvolvimento do projeto muito mais improdutivo.
-*Temos que nos preocupar em não usar nenhum código SQL específico de determinado SGDB para não corrermos o risco de ficarmos preso ao mesmo.
-*Temos mais classes para gerenciar e dar manutenção.
+* Temos que escrever todo o SQL de nossa aplicação manualmente, tornando o desenvolvimento do projeto muito mais improdutivo.
+* Temos que nos preocupar em não usar nenhum código SQL específico de determinado SGDB para não corrermos o risco de ficarmos preso ao mesmo.
+* Temos mais classes para gerenciar e dar manutenção.
 <p>Além disso, o modelo de dados relacional possui algumas limitações em comparação com o modelo de objetos (Nota do DevMan 1), como por exemplo:
-*Não possui herança
-*Não possui polimorfismo
-3.Não permite relações N para N entre duas entidades (tabelas)
+* Não possui herança
+* Não possui polimorfismo
+* Não permite relações N para N entre duas entidades (tabelas)
 <p>Diante disto, corremos o risco de limitar a arquitetura de nossa aplicação orientada a objetos ao modelo relacional. Para resolvermos este problema precisamos realizar um parse dos dados de um modelo para o outro. Este parse pode ser feito manualmente, através de consultas SQL acessando as tabelas de nosso banco de dados e alimentando objetos de nossa aplicação, ou de forma automática utilizando uma camada de mapeamento, chamada ORM.
 <p>ORM (Object Relational Mapping) é uma técnica para mapeamento entre um modelo de dados relacional e um modelo orientado a objetos que visa resolver, ou pelo menos minimizar, as diferenças entres estes dois modelos. Para facilitar a aplicação desta técnica surgiram os frameworks ORM, como por exemplo, o NHibernate e o Entity Framework. Desta forma, esses frameworks se localizam em uma camada intermediária entre a lógica da sua aplicação e o seu SGDB.
 <p>O framework passa a receber as solicitações de interação com o SGDB através de objetos de sua aplicação e gera automaticamente todo o SQL necessário para a operação solicitada, nos poupando do trabalho de escrita e manutenção deste SQL e abstraindo o uso do SGDB, fazendo com que nos preocupemos apenas com nosso modelo de objetos. Além disso, o framework já trata as variações de tipos de dados existentes entre nossa aplicação e nosso SGDB.
@@ -56,8 +56,8 @@
 <p>Pode-se observar um exemplo de mapeamento através do framework NHibernate. Veja que na linha 2 é definido o namespace e o assembly onde está a classe e na linha 3 é indicado o nome da mesma seguido do nome de sua respectiva tabela no banco de dados. Na linha 4 tem-se uma tag Id que indica que o campo Codigo da classe é o identificador do objeto, mapeando o mesmo para a coluna CodCliente que é a chave primária da tabela. Por fim, nas linhas 5 e 6 temos o mapeamento das propriedades da classe Cliente. Vale ressaltar que nestes casos não foi informado o nome da coluna no banco de dados, pois as colunas possuem o mesmo nome das propriedades do objeto Cliente.
 <p>Com todo este mapeamento realizado, o framework passa a ter todas as informações necessárias para recuperar e persistir objetos na base de dados.
 <p>Além disso, acima foi demonstrado um exemplo de mapeamento via arquivo XML externo, através do NHibernate, porém existem outros tipos de mapeamento normalmente disponibilizados pelos frameworks ORM, sendo eles:
-*Usando atributos customizados em nossas classes
-*Usando Fluent API
+* Usando atributos customizados em nossas classes
+* Usando Fluent API
 <p>O mapeamento por XML, exemplificado na Listagem 1, é um dos mais comuns e está presente em muitos ORMs, como por exemplo, no próprio NHibernate. Um inconveniente deste mapeamento é a quantidade de XMLs gerados, além da manutenção um pouco mais trabalhosa, uma vez que você terá que fazê-la em arquivos XMLs, sem os recursos de refatoração e Intellisense nativos do Visual Studio.
 <p>O outro tipo de mapeamento é através de anotações, onde nós definimos no código do modelo as características da tabela ou coluna representada por cada classe e atributo. Em .NET temos os Custom Attributes que são utilizados entre colchetes, sendo aplicados às classes e propriedades, para realização do mapeamento. 
   
@@ -157,6 +157,20 @@
 * SQL – São consultas baseadas em um SQL tradicional. Neste caso normalmente é passado o código SQL para o framework e o mesmo retorna uma lista de objetos com o resultado da consulta.
 * Linguagens específicas – Consultas baseadas em linguagens específicas do framework ORM em questão, ou seja, ao invés de usar SQL utilizamos uma linguagem específica que o próprio framework suporta, como por exemplo, o Linq no caso do Entity Framework.
 <p>Além disso, cada framework possui características e recursos adicionais, como por exemplo, o NHibernate que possui um recurso chamado Named Queries que nos permite armazenar consultas SQL (ou também HQLs) em arquivos xml separados e depois mapeie os mesmos, como mapeou suas tabelas, podendo assim usá-las a qualquer momento no seu código.  
+
+~~~
+01     using (CFcontext db = new CFcontext())
+02     {
+03           string nativeSQLQuery = "SELECT count(*) FROM dbo.Edicoes"
+04           var queryResult = db.ExecuteStoreQuery<int>(nativeSQLQuery);
+05           int totalEdicoes = queryResult.FirstOrDefault();
+06     }
+~~~
+  
+<p>Exemplo de uso de querys SQL no Entity Framework.
+<p>Não é uma regra mas não é incomum encontrar uma linguagem própria de consulta nos frameworks ORM (Exemplo HQL / Linq). A mecânica é que os comandos na linguagem específica passem por um interpretador da framework e depois sejam traduzidos para uma query SQL para ser executada no SGDB.
+<p>Normalmente essas linguagens de consulta são parecidas com a linguagem SQL. Exemplos de linguagens de consulta são o LINQ do .NET, o HQL do NHibernate, a DQL (Doctrine Query Language) do Doctrine (framework de ORM para linguagem PHP), e a LIQUidFORM, uma linguagem que se inspirou no LINQ só que para rodar no JPA (Java Persistence API) da plataforma Java.
+<p>A mecânica é semelhante ao passar um comando do framework para que ele interprete e crie os comandos SQL, a diferença é a flexibilidade, pois com uma linguagem própria de consultas, temos mais liberdade para trabalhar com os dados. Além disso, você não precisa se preocupar com o uso de comandos específicos de cada SGDB, pois a própria framework já trata isso.
   
   
   
