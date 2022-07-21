@@ -41,16 +41,16 @@
 <p>Exemplo de mapeamento em XML com NHibernate.
   
 ~~~
-  <?xml version="1.0" encoding="utf-8" ?>
-     <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
-         namespace="DevMedia.Exemplo " assembly="DevMedia.Exemplo">
-       <class name="DevMedia.Exemplo.Cliente,
-         DevMedia.Exemplo" table="TB_CLIENTE">
-         <id name="Codigo" column="CodCliente"/>
-         <property name="Nome"/>
-         <property name="CPF"/>
-       </class>
-     </hibernate-mapping>
+1  <?xml version="1.0" encoding="utf-8" ?>
+2     <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+3         namespace="DevMedia.Exemplo " assembly="DevMedia.Exemplo">
+4       <class name="DevMedia.Exemplo.Cliente,
+5         DevMedia.Exemplo" table="TB_CLIENTE">
+6         <id name="Codigo" column="CodCliente"/>
+7         <property name="Nome"/>
+8         <property name="CPF"/>
+9       </class>
+10     </hibernate-mapping>
 ~~~
   
 <p>Pode-se observar um exemplo de mapeamento através do framework NHibernate. Veja que na linha 2 é definido o namespace e o assembly onde está a classe e na linha 3 é indicado o nome da mesma seguido do nome de sua respectiva tabela no banco de dados. Na linha 4 tem-se uma tag Id que indica que o campo Codigo da classe é o identificador do objeto, mapeando o mesmo para a coluna CodCliente que é a chave primária da tabela. Por fim, nas linhas 5 e 6 temos o mapeamento das propriedades da classe Cliente. Vale ressaltar que nestes casos não foi informado o nome da coluna no banco de dados, pois as colunas possuem o mesmo nome das propriedades do objeto Cliente.
@@ -62,34 +62,59 @@
 <p>O outro tipo de mapeamento é através de anotações, onde nós definimos no código do modelo as características da tabela ou coluna representada por cada classe e atributo. Em .NET temos os Custom Attributes que são utilizados entre colchetes, sendo aplicados às classes e propriedades, para realização do mapeamento. 
   
 ~~~
-     using System;
-     using System.Collections.Generic;
-     using System.Linq;
-     using System.Text;
-     using NHibernate.Mapping.Attributes;
-
-     namespace DevMedia.Exemplo
-     {
-            [Class(Table = "TB_CLIENTE")]
-            public class Cliente
-            {
-             [Id(Column = "CodCLiente")]
-             public Double Codigo { get; set; }
-
-             [Property]
-             public Double Nome { get; set; }
-
-             [Property]
-             public Double CPF { get; set; }
-            }
-     }
+1     using System;
+2     using System.Collections.Generic;
+3     using System.Linq;
+4     using System.Text;
+5    using NHibernate.Mapping.Attributes;
+6
+7     namespace DevMedia.Exemplo
+8    {
+9            [Class(Table = "TB_CLIENTE")]
+10            public class Cliente
+11            {
+12             [Id(Column = "CodCLiente")]
+13             public Double Codigo { get; set; }
+14
+15             [Property]
+16             public Double Nome { get; set; }
+17
+18             [Property]
+19            public Double CPF { get; set; }
+20            }
+21     }
 ~~~
   
 <p>Exemplo de mapeamento com anotações com Hibernate.
 <p>Na linha 9 tem-se a definição do atributo Class com o parâmetro Table indicando o nome da tabela onde esta classe está mapeada, enquanto que na linha 12 tem-se a indicação de que a propriedade Codigo é o identificador do objeto e está mapeada para a coluna CodCliente da base de dados. Por fim tem-se o mapeamento das outras propriedades nas linhas 15 e 18.
 <p>O que muitos consideram como um inconveniente das anotações é que a classe que usa muitos Custom Attributes fica poluída e, caso o framework ORM fosse trocado,tería que alterar todas as as classes para que usassem os atributos do respectivo framework.
 <p>Como alternativa ao mapeamento, tem ainda normalmente o uso de uma Fluent API, que trata-se de uma API de mapeamento que implementa o pattern Fluent Interface (Nota do DevMan 2).
+
+~~~
+01     using System;
+02     using System.Collections.Generic;
+03     using System.Linq;
+04     using System.Text;
+05     using FluentNHibernate.Mapping;
+06     using DevMedia.Exemplo.ExemploHeranca;
+07
+08     namespace DevMedia.Exemplo
+09     {
+10            public class ClienetMap:ClassMap<Cliente>
+11            {
+12             public ClienetMap() {
+13                 Id(x => x.Codigo).Column("CodCliente");
+14                 Map(x => x.Nome);
+15                 Map(x => x.CPF);
+16
+17                 Table("TB_CLIENTE");
+18             }
+19           }
+20     }
+~~~
   
+<p>Exemplo de mapeamento com Fluent API em NHibernate.
+
   
   
   
