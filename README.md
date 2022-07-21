@@ -122,21 +122,21 @@
 <p>A seguir terá dois exemplos bem diferentes, um em ruby com o ActiveRecord, um ORM muito popular dentro do framework Rails, e um exemplo em C# com o Entity Framework.
   
 ~~~
-pessoa = Pessoa.new
-pessoa.nome = "Priscila Mayumi Sato"
-pessoa.save
+1  pessoa = Pessoa.new
+2  pessoa.nome = "Priscila Mayumi Sato"
+3  pessoa.save
 ~~~
 
 <p>Exemplo de comando para salvar com ActiveRecord.
 
 ~~~
-using (CFcontext db = new CFcontext())
-  {
-    Pessoa pessoa = new Pessoa();
-    pessoa.Nome = "Priscila Mayumi Sato";
-    db.Pessoas.Add(pessoa);
-    db.SaveChanges();
-  }
+1  using (CFcontext db = new CFcontext())
+2  {
+3    Pessoa pessoa = new Pessoa();
+4    pessoa.Nome = "Priscila Mayumi Sato";
+5    db.Pessoas.Add(pessoa);
+6    db.SaveChanges();
+7  }
 ~~~
   
 <p>Exemplo de comando para salvar com Entity Framework.
@@ -150,6 +150,13 @@ using (CFcontext db = new CFcontext())
 2  INTO TB_PESSOA(NOME) VALUES ("Priscila Mayumi Sato";);
 ~~~
   
+##Formas de acesso aos dados
+<p>Os frameworks ORM nos fornecem uma série de maneiras para acessar os dados persistidos no nosso SGDB, dentre estas formas pode-se destacar:
+
+*OCL – Object Constraint Language – São consultas baseadas em critérios definidos em objetos, como por exemplo, os objetos Criteria do NHibernate.
+*SQL – São consultas baseadas em um SQL tradicional. Neste caso normalmente é passado o código SQL para o framework e o mesmo retorna uma lista de objetos com o resultado da consulta.
+*Linguagens específicas – Consultas baseadas em linguagens específicas do framework ORM em questão, ou seja, ao invés de usar SQL utilizamos uma linguagem específica que o próprio framework suporta, como por exemplo, o Linq no caso do Entity Framework.
+<p>Além disso, cada framework possui características e recursos adicionais, como por exemplo, o NHibernate que possui um recurso chamado Named Queries que nos permite armazenar consultas SQL (ou também HQLs) em arquivos xml separados e depois mapeie os mesmos, como mapeou suas tabelas, podendo assim usá-las a qualquer momento no seu código.  
   
   
   
