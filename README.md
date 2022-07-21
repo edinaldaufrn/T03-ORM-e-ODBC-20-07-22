@@ -34,10 +34,10 @@
 ## Como o Minitab converte dados ODBC
 <p>O Minitab importa registros de banco de dados como linhas. O Minitab importa os campos nos registros como colunas. O Minitab coloca os dados importados à direita de qualquer dado que já está na worksheet. A tabela a seguir mostra como Minitab converte tipos de campos para tipos de coluna.
   
-Tipo de campo de banco de dados|Tipo de coluna do Minitab|Observações:
+Tipo de campo de banco de dados | Tipo de coluna do Minitab | Observações
 :------------------------------:-------------------------:-----------:
-  Memo e Texto|O Minitab trunca valores que tenham mais de 80 caracteres.||
-  
+  Memo e Texto | O Minitab trunca valores que tenham mais de 80 caracteres. |  |
+  Numérico, Moeda, e Contador | Numérico |     |
   
   
   # # # # # # # # # # # # # # # # # # # # # # # #
