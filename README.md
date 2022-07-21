@@ -180,6 +180,16 @@
 ~~~
   
 <p>Exemplo de comando com LINQ
+<p>Pode-se observar que temos uma estrutura que vai receber o resultado da query. Pode-se perceber que a query inicia de forma contrária ao SQL, com um comando from, mostrando de onde serão retirados os dados, para depois ser inserida a condição where e por fim o select. Essa estrutura é tida como mais lógica e nela é suportado o intellisense (auto-complete do visual studio).
+  
+~~~
+1    ISession sessao = sessionFactory.OpenSession();
+2    ICriteria criteria = sessao.CreateCriteria<Cliente>().
+3  Add(Expression.Eq("Sexo", "Masculino"));
+4    IList<Cliente> clientes = criteria.List<Cliente>();
+~~~
+  
+<p>Este exemplo que demonstra uma consulta utilizando os objetos de criteria do NHibernate onde adicionamos uma nova expressão de consulta de igualdade, recuperando todos os clientes do sexo masculino. Ao executar o método criteria.List o NHibernate gera internamente todo o SQL necessário para recuperação do resultado.
   
   
   
