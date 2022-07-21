@@ -116,10 +116,39 @@
 <p>Exemplo de mapeamento com Fluent API em NHibernate.
 <p>Pode-se observar o mapeamento com o FluentNHibernate, que é uma iniciativa da comunidade que visa permitir o mapeamento usando uma Fluent API para o NHibernate. Veja que nossa classe de mapeamento herda de uma classe base de mapeamento do FluentNHibernate, chamada ClassMap (linha 10), indicando no tipo genérico a classe que queremos mapear. Esta classe é a responsável por determinar o mapeamento de um objeto do sistema para a base de dados.Na linha 13 temos um método que nos permite indicar a propriedade identificadora do objeto e a coluna para onde a mesma está mapeada. Nas linhas 14 e 15 nós temos o mapeamento das propriedades Nome e CPF, não sendo necessária a definição da coluna da base de dados, pois esta possui o mesmo nome das propriedades do objeto. Por fim, na linha 17 temos a definição da tabela onde os dados da classe Cliente serão persistidos.
 <p>Para muitos o uso de Fluent Interface é o melhor dos dois mundos, onde pode-se realizar todo o mapeamento em arquivos separados utilizando o próprio C#, com todos os recursos de refatoração e intellisense disponíveis e sem poluir nossos objetos.
+##Persistência de Dados
+<p>Agora que já compreendemos como as tabelas e colunas são mapeadas para classes e propriedades, como é feita a persistência destes dados através de frameworks ORM?
+<p>Cada ORM tem seu estilo de código para a persistência dos dados, mas em geral eles possuem o mesmo caminho: interpretar o comando que você solicitou, verificar qual função ou conjunto de funções SQL são necessárias para executar o comando solicitado, efetuar a leitura do mapeamento da classe que você está usando, gerar o SQL necessário, abrir uma conexão com o SGDB, executar o SQL e retornar o resultado.
+<p>A seguir terá dois exemplos bem diferentes, um em ruby com o ActiveRecord, um ORM muito popular dentro do framework Rails, e um exemplo em C# com o Entity Framework.
   
+~~~
+pessoa = Pessoa.new
+pessoa.nome = "Priscila Mayumi Sato"
+pessoa.save
+~~~
+
+<p>Exemplo de comando para salvar com ActiveRecord.
+
+~~~
+using (CFcontext db = new CFcontext())
+  {
+    Pessoa pessoa = new Pessoa();
+    pessoa.Nome = "Priscila Mayumi Sato";
+    db.Pessoas.Add(pessoa);
+    db.SaveChanges();
+  }
+~~~
   
+<p>Exemplo de comando para salvar com Entity Framework.
+<p>Pod-se notar diferentes formas de persistir os dados. Na Listagem temos o exemplo com ActiveRecord: que podemos ver que foi instanciado um objeto do tipo Pessoa, foi atribuido um valor para o atributo Nome e depois o próprio objeto pessoa se persistiu no banco de dados com o método save.
+<p>Na Listagem em C# com Entity Framework, temos a declaração de um contexto de persistência de dados (objeto db), instanciando um objeto do tipo Pessoa, atribuindo um valor a propriedade Nome e posteriormente adicionando este objeto pessoa a um container (Pessoas) de seu tipo, e após isso o objeto foi persistido usando o método SaveChanges do contexto de persistência.
+<p>Os métodos Save e SaveChanges possuem o mesmo objetivo: persistir mudanças de objetos da memória para o banco de dados, porém foram disponibilizados de formas diferentes, uma sendo chamada diretamente no objeto mapeado e o outro solicitando que o objeto a ser persistido seja adicionado a um container.
+<p>No momento em que estes métodos foram acionados, o framework ORM verificou o mapeamento das classes para identificar qual o nome da tabela responsável e das respectivas colunas do banco de dados e gerou um SQL dinamicamente, semelhante código abaixo, e executou o mesmo no SGDB em questão.
   
-  
+~~~
+1  INSERT
+2  INTO TB_PESSOA(NOME) VALUES ("Priscila Mayumi Sato";);
+~~~
   
   
   
