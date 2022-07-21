@@ -38,5 +38,18 @@
 <p>Porém, o NHibernate ainda possui uma consideravel preferência por possuir uma comunidade ativa e por suportar mais escolhas de bancos de dados do que o Entity. A conversa sobre performace pode ser esquecida a partir da versão 5 do Entity Framework quando a performace se equiparou entre eles.
 #Como funciona o ORM?
 <p>O ORM funciona através do mapeamento das características da base de dados para os objetos de nossa aplicação. O primeiro conceito chave é traçar um paralelo entre Classe x Tabela e Propriedade x Coluna. O ORM nos permite informar em que tabela cada classe será persistida e em que coluna do SGDB cada propriedade ficará armazenada.
-
+<p>Um exemplo de mapeamento, em XML.
+~~
+  <?xml version="1.0" encoding="utf-8" ?>
+     <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+         namespace="DevMedia.Exemplo " assembly="DevMedia.Exemplo">
+       <class name="DevMedia.Exemplo.Cliente,
+         DevMedia.Exemplo" table="TB_CLIENTE">
+         <id name="Codigo" column="CodCliente"/>
+         <property name="Nome"/>
+         <property name="CPF"/>
+       </class>
+     </hibernate-mapping>
+~~~~
+  
 ![Alt ou título da imagem](URL da imagem)
