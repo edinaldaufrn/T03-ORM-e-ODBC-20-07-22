@@ -114,8 +114,8 @@
 ~~~
   
 <p>Exemplo de mapeamento com Fluent API em NHibernate.
-
-  
+<p>Pode-se observar o mapeamento com o FluentNHibernate, que é uma iniciativa da comunidade que visa permitir o mapeamento usando uma Fluent API para o NHibernate. Veja que nossa classe de mapeamento herda de uma classe base de mapeamento do FluentNHibernate, chamada ClassMap (linha 10), indicando no tipo genérico a classe que queremos mapear. Esta classe é a responsável por determinar o mapeamento de um objeto do sistema para a base de dados.Na linha 13 temos um método que nos permite indicar a propriedade identificadora do objeto e a coluna para onde a mesma está mapeada. Nas linhas 14 e 15 nós temos o mapeamento das propriedades Nome e CPF, não sendo necessária a definição da coluna da base de dados, pois esta possui o mesmo nome das propriedades do objeto. Por fim, na linha 17 temos a definição da tabela onde os dados da classe Cliente serão persistidos.
+<p>Para muitos o uso de Fluent Interface é o melhor dos dois mundos, onde pode-se realizar todo o mapeamento em arquivos separados utilizando o próprio C#, com todos os recursos de refatoração e intellisense disponíveis e sem poluir nossos objetos.
   
   
   
