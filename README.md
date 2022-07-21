@@ -38,6 +38,7 @@ Tipo de campo de banco de dados | Tipo de coluna do Minitab | Observações
 :------------------------------:-------------------------:-----------:
   Memo e Texto | O Minitab trunca valores que tenham mais de 80 caracteres. |  |
   Numérico, Moeda, e Contador | Numérico |     |
+  Sim/Não
   
   
   # # # # # # # # # # # # # # # # # # # # # # # #
